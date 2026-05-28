@@ -21,14 +21,22 @@ import {
 import { Article } from './types'
 
 // Modular page components
-import SectionHeroFeatured from './components/SectionHeroFeatured'
-import SectionSaudiAndLatest from './components/SectionSaudiAndLatest'
-import SectionWorld from './components/SectionWorld'
-import SectionVideoInsights from './components/SectionVideoInsights'
-import SectionBusinessOpinionSports from './components/SectionBusinessOpinionSports'
-import SectionEsportsLifestyleTech from './components/SectionEsportsLifestyleTech'
-import SectionDiscoverSaudi from './components/SectionDiscoverSaudi'
-import SectionPrintEdition from './components/SectionPrintEdition'
+import HeroFeatured from './components/HeroFeatured'
+import SaudiArabia from './components/SaudiArabia'
+import LatestNews from './components/LatestNews'
+import World from './components/World'
+import VideoInsights from './components/VideoInsights'
+import Business from './components/Business'
+import Opinion from './components/Opinion'
+import Sports from './components/Sports'
+import Esports from './components/Esports'
+import Lifestyle from './components/Lifestyle'
+import Technology from './components/Technology'
+import DiscoverSaudi from './components/DiscoverSaudi'
+import EditorsChoice from './components/EditorsChoice'
+import MostRead from './components/MostRead'
+import Newsletter from './components/Newsletter'
+import PrintEdition from './components/PrintEdition'
 
 export default function App() {
   // Theme state
@@ -412,21 +420,58 @@ export default function App() {
 
       {/* CORE WEB LAYOUT CONTENT CARDS */}
       <main className="flex-1 py-4">
-        <SectionHeroFeatured />
-        <SectionSaudiAndLatest />
-        <SectionWorld />
-        <SectionVideoInsights />
-        <SectionBusinessOpinionSports
-          mostReadPeriod={mostReadPeriod}
-          setMostReadPeriod={setMostReadPeriod}
-          newsLetterEmail={newsLetterEmail}
-          setNewsLetterEmail={setNewsLetterEmail}
-          newsLetterSuccess={newsLetterSuccess}
-          handleSubscribe={handleSubscribe}
-        />
-        <SectionEsportsLifestyleTech />
-        <SectionDiscoverSaudi />
-        <SectionPrintEdition />
+        {/* DESKTOP LAYOUT (>= 768px) */}
+        <div className="hidden md:block container px-4">
+          <div className="mb-8">
+            <HeroFeatured />
+          </div>
+          <div className="grid grid-cols-12 gap-8">
+            {/* Left Content Column (75% / col-span-9) */}
+            <div className="col-span-9 flex flex-col gap-6">
+              <SaudiArabia />
+              <World />
+              <VideoInsights />
+              <Business />
+              <Opinion />
+              <Sports />
+              <Esports />
+              <Lifestyle />
+              <Technology />
+            </div>
+
+            {/* Right Sidebar Column (25% / col-span-3) */}
+            <div className="col-span-3 flex flex-col gap-6 border-l border-gray-200 pl-6 dark:border-zinc-800">
+              <LatestNews />
+              <EditorsChoice />
+              <MostRead mostReadPeriod={mostReadPeriod} setMostReadPeriod={setMostReadPeriod} />
+              <Newsletter newsLetterEmail={newsLetterEmail} setNewsLetterEmail={setNewsLetterEmail} newsLetterSuccess={newsLetterSuccess} handleSubscribe={handleSubscribe} />
+              <PrintEdition />
+            </div>
+          </div>
+          <div className="mt-12 border-t border-gray-200 pt-8 dark:border-zinc-800">
+            <DiscoverSaudi />
+          </div>
+        </div>
+
+        {/* MOBILE LAYOUT (< 768px) */}
+        <div className="block md:hidden container px-4 flex flex-col gap-6">
+          <HeroFeatured />
+          <SaudiArabia />
+          <LatestNews />
+          <World />
+          <VideoInsights />
+          <Business />
+          <Opinion />
+          <Sports />
+          <Esports />
+          <Lifestyle />
+          <Technology />
+          <EditorsChoice />
+          <MostRead mostReadPeriod={mostReadPeriod} setMostReadPeriod={setMostReadPeriod} />
+          <Newsletter newsLetterEmail={newsLetterEmail} setNewsLetterEmail={setNewsLetterEmail} newsLetterSuccess={newsLetterSuccess} handleSubscribe={handleSubscribe} />
+          <PrintEdition />
+          <DiscoverSaudi />
+        </div>
       </main>
 
       {/* FOOTER */}
@@ -513,7 +558,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="copyright text-center text-xs text-[#335243] mt-8 pt-4 border-t border-gray-100 dark:border-zinc-800">Copyright © 2026 Saudi Gazette – All Rights Reserved</div>
+        <div className="copyright text-center text-xs text-[#335243] mt-8 pt-4">Copyright © 2026 Saudi Gazette – All Rights Reserved</div>
       </footer>
     </div>
   )

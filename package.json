@@ -1,8 +1,9 @@
 {
-  "name": "react-example",
+  "name": "react-saudigazette.com.sa",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "description": "",
   "scripts": {
     "dev": "vite --port=3005 --host=0.0.0.0",
     "build": "vite build",
@@ -31,5 +32,30 @@
     "typescript": "~5.8.2",
     "vite": "^6.2.3",
     "@types/express": "^4.17.21"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d9911/react-saudigazette.com.sa.git"
+  },
+  "author": {
+    "name": "Denis Gutsuliak",
+    "email": "admin@d9911.org",
+    "url": "https://t.me/d9911/"
+  },
+  "contributors": [
+    {
+      "name": "Denis Gutsuliak",
+      "email": "admin@d9911.org",
+      "url": "https://t.me/d9911/"
+    }
+  ],
+  "license": "GPL-3.0-or-later",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/d9911/react-saudigazette.com.sa/issues"
+  },
+  "homepage": "https://github.com/d9911/react-saudigazette.com.sa#readme"
 }
