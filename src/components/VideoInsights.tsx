@@ -1,11 +1,9 @@
 import { useState, useRef } from 'react'
 import { Play } from 'lucide-react'
 import { getImageUrl, VIDEO_ARTICLES } from '../data'
-
 export default function VideoInsights() {
   const [activeSlide, setActiveSlide] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
-
   const handleScroll = () => {
     if (containerRef.current) {
       const children = containerRef.current.children
@@ -25,7 +23,6 @@ export default function VideoInsights() {
       }
     }
   }
-
   const scrollToSlide = (index: number) => {
     if (containerRef.current) {
       const container = containerRef.current
@@ -35,7 +32,6 @@ export default function VideoInsights() {
         const containerLeft = container.getBoundingClientRect().left
         const childLeft = child.getBoundingClientRect().left
         const targetScrollLeft = container.scrollLeft + (childLeft - containerLeft)
-
         container.scrollTo({
           left: targetScrollLeft,
           behavior: 'smooth',
@@ -44,12 +40,9 @@ export default function VideoInsights() {
       }
     }
   }
-
   return (
     <div id="video" className="home-videos py-10 my-8 rounded-xl px-4 md:px-6">
       <h3 className="videos-title text-[28px] font-serif font-bold text-white border-b border-[#feffff50] pb-2 mb-6">Video Insights</h3>
-
-      {/* Desktop View */}
       <div className="hidden md:block shadow-md">
         {VIDEO_ARTICLES.length > 0 && (
           <a key={VIDEO_ARTICLES[0].id} href={`#${VIDEO_ARTICLES[0].id}`} className="block group mb-8">
@@ -75,8 +68,6 @@ export default function VideoInsights() {
             </div>
           </a>
         )}
-
-        {/* Grid of other videos */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {VIDEO_ARTICLES.slice(1).map((art) => (
             <a key={art.id} href={`#${art.id}`} className="block video-card group">
@@ -99,8 +90,6 @@ export default function VideoInsights() {
           ))}
         </div>
       </div>
-
-      {/* Mobile View: Horizontal Scroll with 9:16 aspect ratio (276*400) and text on bottom */}
       <div
         ref={containerRef}
         onScroll={handleScroll}
@@ -127,8 +116,6 @@ export default function VideoInsights() {
           </a>
         ))}
       </div>
-
-      {/* Mobile Video Slides Indicators */}
       <div className="carousel-bullets only-mobile" style={{ marginTop: '16px' }} role="group" aria-label="Slide navigation">
         {VIDEO_ARTICLES.map((_, idx) => (
           <button

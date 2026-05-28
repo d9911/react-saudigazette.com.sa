@@ -1,10 +1,8 @@
 import { useState, useRef } from 'react'
 import { getImageUrl, MAIN_FEATURED_ARTICLE, THREE_FEATURED_CARDS } from '../data'
-
 export default function HeroFeatured() {
   const [activeSlide, setActiveSlide] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
-
   const handleScroll = () => {
     if (containerRef.current) {
       const children = containerRef.current.children
@@ -24,7 +22,6 @@ export default function HeroFeatured() {
       }
     }
   }
-
   const scrollToSlide = (index: number) => {
     if (containerRef.current) {
       const container = containerRef.current
@@ -34,7 +31,6 @@ export default function HeroFeatured() {
         const containerLeft = container.getBoundingClientRect().left
         const childLeft = child.getBoundingClientRect().left
         const targetScrollLeft = container.scrollLeft + (childLeft - containerLeft)
-
         container.scrollTo({
           left: targetScrollLeft,
           behavior: 'smooth',
@@ -43,10 +39,8 @@ export default function HeroFeatured() {
       }
     }
   }
-
   return (
     <div className="py-2.5">
-      {/* Featured Headline Hero */}
       <a href="#exclusive-report" className="block hover:opacity-95 transition" style={{ textDecoration: 'none' }}>
         <div className="home-featured-news flex flex-col md:flex-row items-stretch gap-8 mb-6">
           <div className="left flex-1">
@@ -72,8 +66,6 @@ export default function HeroFeatured() {
           </div>
         </div>
       </a>
-
-      {/* Grid of 3 accompanying featured stories */}
       <div ref={containerRef} onScroll={handleScroll} className="three-cards grid grid-cols-1 md:grid-cols-3 gap-6">
         {THREE_FEATURED_CARDS.map((card) => (
           <a key={card.id} href={`#${card.id}`} className="block shrink-0 snap-start w-[calc(100%-40px)] md:w-auto border-b border-gray-100 pb-4 md:border-none md:pb-0">
@@ -96,8 +88,6 @@ export default function HeroFeatured() {
           </a>
         ))}
       </div>
-
-      {/* Mobile Slide indicators */}
       <div className="carousel-bullets only-mobile" role="group" aria-label="Slide navigation">
         {THREE_FEATURED_CARDS.map((_, idx) => (
           <button

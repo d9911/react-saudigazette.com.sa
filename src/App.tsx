@@ -19,8 +19,6 @@ import {
   MOST_READ_ARTICLES,
 } from './data'
 import { Article } from './types'
-
-// Modular page components
 import HeroFeatured from './components/HeroFeatured'
 import SaudiArabia from './components/SaudiArabia'
 import LatestNews from './components/LatestNews'
@@ -38,37 +36,21 @@ import MostRead from './components/MostRead'
 import Newsletter from './components/Newsletter'
 import PrintEdition from './components/PrintEdition'
 import AdaptedArticle from './components/AdaptedArticle'
-
 export default function App() {
-  // Page view state: "article" | "home"
   const [currentView, setCurrentView] = useState<'article' | 'home'>('article')
-
-  // Theme state
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     const saved = localStorage.getItem('mode')
     if (saved) return saved === 'dark'
     return window.matchMedia('(prefers-color-scheme: dark)').matches
   })
-
-  // Mobile drawer state
   const [drawerOpen, setDrawerOpen] = useState(false)
-
-  // Search state
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState<Article[]>([])
-
-  // Most Read active period: "day" | "week" | "month"
   const [mostReadPeriod, setMostReadPeriod] = useState<'day' | 'week' | 'month'>('day')
-
-  // Newsletter state
   const [newsLetterEmail, setNewsLetterEmail] = useState('')
   const [newsLetterSuccess, setNewsLetterSuccess] = useState('')
-
-  // Dynamic Date string state
   const [liveDateString, setLiveDateString] = useState('')
-
-  // Apply dark class
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark-mode')
@@ -78,14 +60,10 @@ export default function App() {
       localStorage.setItem('mode', 'light')
     }
   }, [darkMode])
-
-  // Generate dynamic date with Hijri
   useEffect(() => {
     const calculateSaudiDate = () => {
       try {
         const today = new Date()
-
-        // Format Gregorian
         const gregorianFormatter = new Intl.DateTimeFormat('en-US', {
           weekday: 'long',
           day: 'numeric',
@@ -93,20 +71,15 @@ export default function App() {
           year: 'numeric',
         })
         const gregorianDate = gregorianFormatter.format(today)
-
-        // Format Hijri (Umm al-Qura)
         const hijriFormatter = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {
           day: 'numeric',
           month: 'long',
           year: 'numeric',
         })
         const hijriParts = hijriFormatter.formatToParts(today)
-
         const hijriDay = hijriParts.find((p) => p.type === 'day')?.value || '26'
         const hijriYear = hijriParts.find((p) => p.type === 'year')?.value || '1447'
         const hijriMonthRaw = hijriParts.find((p) => p.type === 'month')?.value || 'Muharram'
-
-        // Traditional Saudi Hijri Month Transliterations
         const traditionalMonths: { [key: string]: string } = {
           Muharram: 'Muharram',
           Safar: 'Safar',
@@ -121,27 +94,20 @@ export default function App() {
           'Dhuʻl-Qiʻdah': "Dhu al-Qi'dah",
           'Dhuʻl-Hijjah': 'Dhu al-Hijjah',
         }
-
         const hijriMonth = traditionalMonths[hijriMonthRaw] || hijriMonthRaw
         return `${gregorianDate} / ${hijriDay}, ${hijriMonth}, ${hijriYear}`
       } catch (err) {
-        // Fallback robust date
         return 'Monday July 21, 2025 / 26, Muharram, 1447'
       }
     }
-
     setLiveDateString(calculateSaudiDate())
   }, [])
-
-  // Handle Search input
   useEffect(() => {
     if (!searchQuery.trim()) {
       setSearchResults([])
       return
     }
-
     const query = searchQuery.toLowerCase()
-    // Gather all existing items in lists to query
     const allArticles = [
       MAIN_FEATURED_ARTICLE,
       ...THREE_FEATURED_CARDS,
@@ -159,21 +125,15 @@ export default function App() {
       ...EDITORS_CHOICE_ARTICLES,
       ...DISCOVER_SAUDI_ARTICLES,
     ]
-
-    // Filter duplicates
     const uniqueMap = new Map<string | number, Article>()
     allArticles.forEach((art) => {
       if (art && art.title) {
         uniqueMap.set(art.url, art)
       }
     })
-
     const results = Array.from(uniqueMap.values()).filter((art) => art.title.toLowerCase().includes(query) || (art.description && art.description.toLowerCase().includes(query)))
-
     setSearchResults(results)
   }, [searchQuery])
-
-  // Listen to hash changes for single page routing
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash
@@ -201,44 +161,32 @@ export default function App() {
           window.scrollTo({ top: 0, behavior: 'smooth' })
         }
       } else {
-        // Default / empty hash or any other hash goes to Special Report article
         setCurrentView('article')
         window.scrollTo({ top: 0, behavior: 'smooth' })
       }
     }
-
     window.addEventListener('hashchange', handleHashChange)
-    // Execute on mount to handle direct hash loads
     handleHashChange()
-
     return () => {
       window.removeEventListener('hashchange', handleHashChange)
     }
   }, [])
-
   const handleSubscribe = (e: FormEvent) => {
     e.preventDefault()
     if (!newsLetterEmail.trim()) return
     setNewsLetterSuccess("Thank you! You are now subscribed to the Saudi Gazette's newsletter list.")
     setNewsLetterEmail('')
   }
-
   return (
     <div id="sg-newspaper-app" className="min-h-screen flex flex-col">
-      {/* Target element for content access */}
       <h1 className="sr-only">Home - Latest News from Saudi Arabia and the World</h1>
-
-      {/* TOP DESKTOP HEADER */}
       <div className="container fluid-container">
         <div className="row">
           <div className="col-md-12">
             <header className="w-full">
               <nav className="desktop-nav flex flex-col border-b border-[#E1E1E1] py-5 gap-2">
                 <div className="date w-full flex justify-between items-center relative min-h-[94px]">
-                  {/* Left formatted live date */}
                   <div className="fluid-header-date">{liveDateString || 'Loading date...'}</div>
-
-                  {/* Middle descriptive brand header */}
                   <div className="since flex flex-col items-center gap-1.5 absolute left-1/2 -translate-x-1/2">
                     <div className="text-[11px] font-bold text-[#335243] uppercase tracking-widest font-sans dark:text-emerald-400">Since 1976</div>
                     <a href="#" className="block">
@@ -253,8 +201,6 @@ export default function App() {
                     </a>
                     <div className="text-[10px] font-bold text-gray-400 tracking-widest uppercase mt-1">LEADING THE WAY</div>
                   </div>
-
-                  {/* Right Header Navigation controls */}
                   <div className="right-menu header-icons flex items-center gap-4">
                     <a href="#today-edition" title="Epaper" className="hover:text-emerald-700 transition">
                       <Newspaper className="w-5 h-5 text-gray-600 dark:text-gray-300" />
@@ -268,8 +214,6 @@ export default function App() {
                   </div>
                 </div>
               </nav>
-
-              {/* MOBILE NAVIGATION BAR */}
               <nav className="mobile-nav flex md:hidden items-center justify-between py-4 px-3 border-b border-gray-200">
                 <button id="burger" onClick={() => setDrawerOpen(true)} className="p-1 rounded text-gray-800 dark:text-white" aria-label="Toggle Menu">
                   <Menu className="w-6 h-6" />
@@ -295,8 +239,6 @@ export default function App() {
           </div>
         </div>
       </div>
-
-      {/* DESKTOP HIGHLIGHT NAVIGATION BAR */}
       <div className="container fluid-container">
         <div className="main-menu hidden md:flex w-full justify-between items-center py-2.5 mb-4 flex-wrap gap-y-2.5">
           <div className="hidden" />
@@ -346,7 +288,6 @@ export default function App() {
               Discover Saudi
             </a>
           </div>
-          {/* Desktop Search Toggle */}
           <div className="relative">
             <button onClick={() => setSearchOpen(!searchOpen)} className="p-1 rounded text-gray-800 dark:text-white cursor-pointer hover:bg-gray-150 transition" title="Search">
               <Search className="w-5 h-5" />
@@ -354,8 +295,6 @@ export default function App() {
           </div>
         </div>
       </div>
-
-      {/* FLOATING SEARCH MODAL PANEL */}
       {searchOpen && (
         <div className="bg-gray-50 border-b border-gray-200 py-6 px-4 dark:bg-zinc-900 transition-all">
           <div className="container fluid-container max-w-4xl mx-auto flex flex-col gap-4">
@@ -381,8 +320,6 @@ export default function App() {
                 className="w-full bg-white text-black pl-11 pr-4 py-2.5 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-emerald-700 dark:bg-zinc-800 dark:text-white dark:border-zinc-700"
               />
             </div>
-
-            {/* Live Search Results */}
             {searchQuery.trim() && (
               <div className="bg-white dark:bg-zinc-800 rounded-lg p-4 shadow-md max-h-[350px] overflow-y-auto">
                 <p className="text-[11px] font-semibold text-gray-400 mb-3 uppercase tracking-wider">Matches found: {searchResults.length}</p>
@@ -414,8 +351,6 @@ export default function App() {
           </div>
         </div>
       )}
-
-      {/* MOBILE DRAWER LINK SLIDER OVERLAY */}
       <div className={`mobile-side-overlay ${drawerOpen ? 'open' : ''}`} onClick={() => setDrawerOpen(false)} aria-hidden="true" />
       <aside className={`mobile-side-menu ${drawerOpen ? 'open' : ''}`} aria-label="Mobile Menu">
         <div className="mobile-side-header">
@@ -488,8 +423,6 @@ export default function App() {
           </a>
         </div>
       </aside>
-
-      {/* CORE WEB LAYOUT CONTENT CARDS */}
       <main className="flex-1 fluid-main-padding">
         <div className={currentView === 'article' ? 'block' : 'hidden'}>
           <AdaptedArticle
@@ -501,15 +434,12 @@ export default function App() {
             setMostReadPeriod={setMostReadPeriod}
           />
         </div>
-
         <div className={currentView === 'home' ? 'block' : 'hidden'}>
-          {/* DESKTOP LAYOUT (>= 768px) */}
           <div className="hidden md:block container fluid-container">
             <div className="mb-8">
               <HeroFeatured />
             </div>
             <div className="grid grid-cols-12 gap-8">
-              {/* Left Content Column (75% / col-span-9) */}
               <div className="col-span-9 flex flex-col gap-6">
                 <SaudiArabia />
                 <World />
@@ -521,8 +451,6 @@ export default function App() {
                 <Lifestyle />
                 <Technology />
               </div>
-
-              {/* Right Sidebar Column (25% / col-span-3) */}
               <div className="col-span-3 flex flex-col gap-6 border-l border-gray-200 pl-6 dark:border-zinc-800">
                 <LatestNews />
                 <EditorsChoice />
@@ -535,8 +463,6 @@ export default function App() {
               <DiscoverSaudi />
             </div>
           </div>
-
-          {/* MOBILE LAYOUT (< 768px) */}
           <div className="block md:hidden container fluid-container flex flex-col gap-6">
             <HeroFeatured />
             <SaudiArabia />
@@ -557,8 +483,6 @@ export default function App() {
           </div>
         </div>
       </main>
-
-      {/* FOOTER */}
       <footer className="border-t-[25px] border-[#335243] py-10">
         <div className="container fluid-container footer-content flex flex-col md:flex-row justify-between gap-10">
           <div className="left-footer flex flex-col justify-between items-start gap-4">
@@ -587,7 +511,6 @@ export default function App() {
               </a>
             </div>
           </div>
-
           <div className="right-footer flex flex-col md:flex-row gap-10">
             <div className="col1">
               <div className="title text-base font-bold text-[#335243] font-serif border-b border-gray-300 pb-2">News Sections</div>
@@ -621,7 +544,6 @@ export default function App() {
                 </li>
               </ul>
             </div>
-
             <div className="col1">
               <div className="title text-base font-bold text-[#335243] font-serif border-b border-gray-300 pb-2">Saudi Gazette</div>
               <ul className="links mt-3 flex flex-col gap-1.5 md:gap-1 text-[13.5px] font-semibold" style={{ columnCount: 1, maxHeight: 'unset' }}>
@@ -641,7 +563,6 @@ export default function App() {
             </div>
           </div>
         </div>
-
         <div className="copyright text-center text-xs text-[#335243] mt-8 pt-4">Copyright © 2026 Saudi Gazette – All Rights Reserved</div>
       </footer>
     </div>

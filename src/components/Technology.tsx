@@ -1,11 +1,9 @@
-import { getImageUrl, TECHNOLOGY_ARTICLES } from "../data";
+import { getImageUrl, TECHNOLOGY_ARTICLES } from '../data'
 
 export default function Technology() {
   return (
     <div className="mb-8" id="tech">
-      <h3 className="big-title text-[28px] font-serif font-bold text-[#335243] border-b border-gray-300 pb-1.5 mb-2 dark:text-emerald-400">
-        Technology
-      </h3>
+      <h3 className="big-title text-[28px] font-serif font-bold text-[#335243] border-b border-gray-300 pb-1.5 mb-2 dark:text-emerald-400">Technology</h3>
       <div className="grid-3-news esports-mobile">
         {TECHNOLOGY_ARTICLES.map((art) => (
           <a key={art.id} href={`#${art.id}`} className="block group">
@@ -15,14 +13,12 @@ export default function Technology() {
                   src={getImageUrl(art.image)}
                   alt={art.title}
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = "https://saudigazette.com.sa/saudigazette/uploads/global_files/no-image.jpg";
+                    ;(e.target as HTMLImageElement).src = 'https://saudigazette.com.sa/saudigazette/uploads/global_files/no-image.jpg'
                   }}
                 />
               </div>
               <div className="content">
-                <h4 className="description text-[14.5px] font-bold text-gray-900 group-hover:text-emerald-800 transition font-serif leading-snug line-clamp-3 dark:text-gray-200">
-                  {art.title}
-                </h4>
+                <h4 className="description text-[14.5px] font-bold text-gray-900 group-hover:text-emerald-800 transition font-serif leading-snug line-clamp-3 dark:text-gray-200">{art.title}</h4>
                 <span className="time text-[10px] text-gray-400 mt-1 block">{art.publishTime}</span>
               </div>
             </div>
@@ -30,5 +26,5 @@ export default function Technology() {
         ))}
       </div>
     </div>
-  );
+  )
 }
