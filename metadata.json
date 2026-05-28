@@ -1,0 +1,6 @@
+{
+  "name": "Saudi Gazette",
+  "description": "Optimized and cleaned homepage clone of Saudi Gazette, preserving original styles and structure but with removed redundant trackers and scripts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
