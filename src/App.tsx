@@ -236,7 +236,7 @@ export default function App() {
               <nav className="desktop-nav flex flex-col border-b border-[#E1E1E1] py-5 gap-2">
                 <div className="date w-full flex justify-between items-center relative min-h-[94px]">
                   {/* Left formatted live date */}
-                  <div className="text-gray-500 font-semibold text-xs min-w-[240px]">{liveDateString || 'Loading date...'}</div>
+                  <div className="fluid-header-date">{liveDateString || 'Loading date...'}</div>
 
                   {/* Middle descriptive brand header */}
                   <div className="since flex flex-col items-center gap-1.5 absolute left-1/2 -translate-x-1/2">

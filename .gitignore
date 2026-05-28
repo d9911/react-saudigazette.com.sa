@@ -1,32 +1,47 @@
+# Dependencies
 node_modules/
-build/
+*/node_modules/
+
+# Build outputs
 dist/
-coverage/
-.DS_Store
-*.log
+build/
+*/dist/
+
+# Lock files (project uses yarn)
+package-lock.json
+*/package-lock.json
+yarn.lock
+*/yarn.lock
+
+# Environment
+.env
 .env*
 !.env.example
+
+# Logs
+*.log
+
+# OS files
 .DS_Store
-.vscode/**
+
+# IDE
+.vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-!.vscode/*.code-snippets
 
-
-*/node_modules/**
-node_modules/**
-
-*/dist/**
-*/.env
-*/yarn.lock
-.claude/**
-dist/**
-*/package-lock.json
-package-lock.json
+# Claude / AI
+.claude/
 CLAUDE.md
+
+# Coverage
+coverage/
+
+# Temp files
 */output.txt
-node_modules/**
+output.txt
+
+# Specific assets (если нужно исключить конкретные файлы)
 dist/assets/index-DOosnPSx.js
 dist/assets/index-DUdBUt-R.css

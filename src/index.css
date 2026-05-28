@@ -1709,3 +1709,41 @@ footer .footer-content .left-footer .social {
 .dark-mode .mobile-side-menu svg:hover {
   color: #34d399 !important;
 }
+
+/* === FLUID RESPONSIVE HEADER DATE === */
+.fluid-header-date {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 600;
+  color: #6b7280; /* text-gray-500 */
+  box-sizing: border-box;
+}
+
+.dark-mode .fluid-header-date {
+  color: #c9d1d9 !important;
+}
+
+/* On desktops/laptops between 769px and 1210px */
+@media (min-width: 769px) and (max-width: 1210px) {
+  .fluid-header-date {
+    /* Using the exact user-defined fluid typography calculation */
+    font-size: clamp(9.5px, calc((100vw - 769px) / (1210 - 769) * (12 - 9.5) + 9.5px), 12px) !important;
+    max-width: 130px !important;
+    min-width: 0 !important;
+    white-space: normal !important;
+    word-break: keep-all !important;
+    word-wrap: break-word !important;
+    line-height: 1.45 !important;
+    display: inline-block !important;
+  }
+}
+
+/* On high-res screens greater than 1210px */
+@media (min-width: 1211px) {
+  .fluid-header-date {
+    font-size: 12px !important;
+    min-width: 240px !important;
+    max-width: none !important;
+    white-space: nowrap !important;
+  }
+}
+
