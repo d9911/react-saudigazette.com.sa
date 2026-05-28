@@ -38,7 +38,7 @@ export default function AdaptedArticle({
   }, []);
 
   return (
-    <div id="adapted-exclusive-report" className="container px-4 py-2">
+    <div id="adapted-exclusive-report" className="container py-2 fluid-article-container">
       {/* Breadcrumb path */}
       <div className="text-[11px] font-bold text-[#335243] dark:text-emerald-400 uppercase tracking-widest mb-4">
         Home &gt; World &gt; Exclusive Report
@@ -49,7 +49,7 @@ export default function AdaptedArticle({
         <div className="col-span-11 md:col-span-8 flex flex-col gap-6">
           <article className="prose dark:prose-invert max-w-none">
             {/* Main Headline */}
-            <h1 className="text-3xl md:text-[40px] font-bold tracking-tight font-serif text-gray-900 leading-tight dark:text-gray-100 mb-4">
+            <h1 className="fluid-article-title font-bold tracking-tight font-serif text-gray-900 leading-tight dark:text-gray-100 mb-4">
               SPECIAL REPORT: Trump's sudden decision on Elon Musk after the reveal of an AI-powered investment platform that has taken Kuwait by storm
             </h1>
 
@@ -74,7 +74,7 @@ export default function AdaptedArticle({
             </div>
 
             {/* Main Article Body content */}
-            <div className="text-[17px] text-gray-800 leading-relaxed dark:text-zinc-200 flex flex-col gap-5 font-sans">
+            <div className="fluid-article-paragraph text-gray-800 leading-relaxed dark:text-zinc-200 flex flex-col gap-5 font-sans">
               <div className="overflow-hidden rounded-lg mb-4">
                 <img
                   src="assets/img/change-trumu1.png"
@@ -90,7 +90,7 @@ export default function AdaptedArticle({
                 According to sources close to decision-making circles, Trump expressed strong displeasure after reviewing information indicating that Elon Musk's team was developing an AI-powered digital investment system — a platform for managing and generating automated returns, which was initially launched during its beta phase exclusively for residents of <strong>Kuwait</strong>.
               </p>
 
-              <h2 className="text-2xl font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
+              <h2 className="fluid-article-heading font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
                 Why did this cause so much controversy?
               </h2>
 
@@ -106,7 +106,7 @@ export default function AdaptedArticle({
                 In response, Musk asserted that choosing Kuwait as the initial test market was part of a carefully planned pilot scheme, given its forward-thinking regulatory environment and readiness to embrace innovation in the digital asset sector.
               </p>
 
-              <h2 className="text-2xl font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
+              <h2 className="fluid-article-heading font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
                 What exactly was revealed?
               </h2>
 
@@ -133,7 +133,7 @@ export default function AdaptedArticle({
                 According to the development team, the platform was specifically designed for individuals looking to diversify their income streams without the need to follow the markets closely or possess advanced trading expertise.
               </p>
 
-              <h2 className="text-2xl font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
+              <h2 className="fluid-article-heading font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
                 Is this reshaping the concept of financial independence in Kuwait?
               </h2>
 
@@ -156,7 +156,7 @@ export default function AdaptedArticle({
                 The system operates as a trading infrastructure built on neural networks, scanning digital markets, spotting price arbitrage opportunities, and executing a vast number of transactions in fractions of a second. This enables potential gains even from tiny price fluctuations at a speed that far exceeds human response capabilities.
               </p>
 
-              <h2 className="text-2xl font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
+              <h2 className="fluid-article-heading font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
                 What is the next step?
               </h2>
 
@@ -175,7 +175,7 @@ export default function AdaptedArticle({
                 A limited number of slots are currently available during this beta testing phase, allowing users to experience the system early.
               </p>
 
-              <h2 className="text-2xl font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
+              <h2 className="fluid-article-heading font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
                 The Quiet Financial Challenge Solved by This Technology
               </h2>
 
@@ -206,7 +206,7 @@ export default function AdaptedArticle({
                 “It is not about overnight riches, but rather about providing a stable technical framework that helps individuals navigate unpredictable market volatility.”
               </p>
 
-              <h2 className="text-2xl font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
+              <h2 className="fluid-article-heading font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
                 What Distinguishes the Platform?
               </h2>
 
@@ -232,7 +232,7 @@ export default function AdaptedArticle({
                 </a>
               </div>
 
-              <h2 className="text-2xl font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
+              <h2 className="fluid-article-heading font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
                 How to secure early access to Crypro Platform AI
               </h2>
 
@@ -244,7 +244,7 @@ export default function AdaptedArticle({
                 Crypro Platform AI is currently undergoing technical audits and operational standard testing to align with compliance guidelines applicable in Kuwait.
               </p>
 
-              <h2 className="text-2xl font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
+              <h2 className="fluid-article-heading font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
                 How to Get Started
               </h2>
 
@@ -254,7 +254,7 @@ export default function AdaptedArticle({
                 <li>Withdraw your funds anytime directly via your personal dashboard.</li>
               </ul>
 
-              <h2 className="text-2xl font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
+              <h2 className="fluid-article-heading font-bold text-emerald-800 dark:text-emerald-400 font-serif mt-6 mb-2">
                 Why Kuwait's residents are turning to this platform:
               </h2>
 
@@ -541,7 +541,7 @@ export default function AdaptedArticle({
                   time: "9 hours ago"
                 }
               ].map((com) => (
-                <div key={com.id} className="flex gap-4 p-3 border border-gray-100 rounded-lg dark:border-zinc-800">
+                <div key={com.id} className="flex gap-4 border border-gray-100 rounded-lg dark:border-zinc-800 fluid-comment-card">
                   <img
                     src={`assets/img/${com.avatar}`}
                     alt={com.author}
@@ -552,7 +552,7 @@ export default function AdaptedArticle({
                   />
                   <div className="flex flex-col gap-1.5 flex-1">
                     <span className="text-sm font-bold text-gray-900 dark:text-zinc-200">{com.author}</span>
-                    <p className="text-[14px] text-gray-700 dark:text-zinc-300 leading-normal m-0">{com.comment}</p>
+                    <p className="fluid-comment-text text-gray-700 dark:text-zinc-300 leading-normal m-0">{com.comment}</p>
                     <div className="text-[11px] text-gray-400 flex gap-4 mt-1 font-sans">
                       <span>Reply</span>
                       <span>&middot;</span>
