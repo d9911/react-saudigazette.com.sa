@@ -47,20 +47,20 @@
         box-sizing: border-box;
       }
 
-      @keyframes sk-pulse-anim {
-        0%,
-        100% {
-          background-color: var(--sk-bg);
-          opacity: 0.7;
+      @keyframes sk-shimmer-anim {
+        0% {
+          background-position: 200% 0;
         }
-        50% {
-          background-color: var(--sk-pulse);
-          opacity: 1;
+        100% {
+          background-position: -200% 0;
         }
       }
 
       .sk-pulse {
-        animation: sk-pulse-anim 1.4s infinite ease-in-out;
+        background-color: var(--sk-bg);
+        background: linear-gradient(90deg, var(--sk-bg) 25%, var(--sk-pulse) 50%, var(--sk-bg) 75%);
+        background-size: 200% 100%;
+        animation: sk-shimmer-anim 1.5s infinite linear;
         border-radius: 4px;
       }
 
