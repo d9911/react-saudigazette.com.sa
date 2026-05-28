@@ -1,12 +1,4 @@
-node_modules/**
-build/
-dist/
-coverage/
 .DS_Store
-*.log
-.env*
-!.env.example
-
 .vscode/**
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -14,10 +6,19 @@ coverage/
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
+
+*/node_modules/**
+node_modules/**
+
+*/dist/**
 */.env
 */yarn.lock
 .claude/**
+dist/**
 */package-lock.json
 package-lock.json
 CLAUDE.md
 */output.txt
+node_modules/**
+dist/assets/index-DOosnPSx.js
+dist/assets/index-DUdBUt-R.css
