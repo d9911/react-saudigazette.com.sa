@@ -7,21 +7,37 @@ export default function HeroFeatured() {
 
   const handleScroll = () => {
     if (containerRef.current) {
-      const { scrollLeft, clientWidth } = containerRef.current
-      const index = Math.round(Math.abs(scrollLeft) / (clientWidth || 1))
-      setActiveSlide(index)
+      const children = containerRef.current.children
+      if (children && children.length > 0) {
+        let closestIndex = 0
+        let minDiff = Infinity
+        const containerLeft = containerRef.current.getBoundingClientRect().left
+        for (let i = 0; i < children.length; i++) {
+          const childLeft = children[i].getBoundingClientRect().left
+          const diff = Math.abs(childLeft - containerLeft)
+          if (diff < minDiff) {
+            minDiff = diff
+            closestIndex = i
+          }
+        }
+        setActiveSlide(closestIndex)
+      }
     }
   }
 
   const scrollToSlide = (index: number) => {
     if (containerRef.current) {
-      const children = containerRef.current.children
+      const container = containerRef.current
+      const children = container.children
       if (children && children[index]) {
         const child = children[index] as HTMLElement
-        child.scrollIntoView({
+        const containerLeft = container.getBoundingClientRect().left
+        const childLeft = child.getBoundingClientRect().left
+        const targetScrollLeft = container.scrollLeft + (childLeft - containerLeft)
+
+        container.scrollTo({
+          left: targetScrollLeft,
           behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center',
         })
         setActiveSlide(index)
       }
@@ -60,7 +76,7 @@ export default function HeroFeatured() {
       {/* Grid of 3 accompanying featured stories */}
       <div ref={containerRef} onScroll={handleScroll} className="three-cards grid grid-cols-1 md:grid-cols-3 gap-6">
         {THREE_FEATURED_CARDS.map((card) => (
-          <a key={card.id} href={`#${card.id}`} className="block border-b border-gray-100 pb-4 md:border-none md:pb-0">
+          <a key={card.id} href={`#${card.id}`} className="block shrink-0 snap-start w-[calc(100%-40px)] md:w-auto border-b border-gray-100 pb-4 md:border-none md:pb-0">
             <div className="home-news-card h-full flex flex-col justify-between">
               <div className="layoutRatioSquare overflow-hidden rounded-lg mb-2">
                 <img

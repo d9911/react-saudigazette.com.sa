@@ -8,21 +8,37 @@ export default function VideoInsights() {
 
   const handleScroll = () => {
     if (containerRef.current) {
-      const { scrollLeft, clientWidth } = containerRef.current
-      const index = Math.round(Math.abs(scrollLeft) / (clientWidth || 1))
-      setActiveSlide(index)
+      const children = containerRef.current.children
+      if (children && children.length > 0) {
+        let closestIndex = 0
+        let minDiff = Infinity
+        const containerLeft = containerRef.current.getBoundingClientRect().left
+        for (let i = 0; i < children.length; i++) {
+          const childLeft = children[i].getBoundingClientRect().left
+          const diff = Math.abs(childLeft - containerLeft)
+          if (diff < minDiff) {
+            minDiff = diff
+            closestIndex = i
+          }
+        }
+        setActiveSlide(closestIndex)
+      }
     }
   }
 
   const scrollToSlide = (index: number) => {
     if (containerRef.current) {
-      const children = containerRef.current.children
+      const container = containerRef.current
+      const children = container.children
       if (children && children[index]) {
         const child = children[index] as HTMLElement
-        child.scrollIntoView({
+        const containerLeft = container.getBoundingClientRect().left
+        const childLeft = child.getBoundingClientRect().left
+        const targetScrollLeft = container.scrollLeft + (childLeft - containerLeft)
+
+        container.scrollTo({
+          left: targetScrollLeft,
           behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center',
         })
         setActiveSlide(index)
       }
