@@ -405,17 +405,26 @@ nav .date .right-menu .image3 {
 
 .home-featured-news {
   width: 100%;
-  gap: 90px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 769px) {
+  .home-featured-news {
+    flex-direction: row;
+    gap: 40px;
+  }
 }
 
 .home-featured-news .left {
-  width: 650px;
+  flex: 1;
+  min-width: 0;
 }
 
 .home-featured-news .left img {
   width: 100%;
+  height: auto;
 }
 
 .home-featured-news .right {
@@ -426,6 +435,13 @@ nav .date .right-menu .image3 {
   gap: 20px;
   flex-direction: column;
   padding: 10px 0;
+}
+
+@media (min-width: 769px) {
+  .home-featured-news .right {
+    width: 420px;
+    flex-shrink: 0;
+  }
 }
 
 .home-featured-news .right .category {
@@ -1298,7 +1314,6 @@ footer .footer-content .left-footer .social {
   }
 
   .home-featured-news {
-    grid-template-columns: 1fr;
     gap: 15px;
   }
 
@@ -1746,4 +1761,60 @@ footer .footer-content .left-footer .social {
     max-width: none !important;
     white-space: nowrap !important;
   }
+}
+
+/* === CAROUSEL BULLETS ON MOBILE === */
+.carousel-bullets {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.carousel-bullets button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #d1d5db; /* gray-300 */
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-bullets button.active {
+  background-color: #064e3b; /* emerald-800 */
+  transform: scale(1.25);
+}
+
+.dark-mode .carousel-bullets button {
+  background-color: #3f3f46; /* zinc-700 */
+}
+
+.dark-mode .carousel-bullets button.active {
+  background-color: #10b981; /* emerald-500 */
+}
+
+@media (min-width: 769px) {
+  .only-mobile {
+    display: none !important;
+  }
+}
+
+/* === SEPARATE FLUID RESPONSIVE MARGINS CLASS === */
+.fluid-container {
+  padding-left: clamp(16px, calc((100vw - 600px) / (1920 - 600) * (50 - 18.53) + 18.53px), 50px) !important;
+  padding-right: clamp(16px, calc((100vw - 600px) / (1920 - 600) * (50 - 18.53) + 18.53px), 50px) !important;
+}
+
+/* === SEPARATE FLUID SPACING CLASSES === */
+.fluid-main-padding {
+  padding-top: clamp(18.53px, calc((100vw - 600px) / (1920 - 600) * (50 - 18.53) + 18.53px), 48px) !important;
+  padding-bottom: clamp(18.53px, calc((100vw - 600px) / (1920 - 600) * (50 - 18.53) + 18.53px), 48px) !important;
+}
+
+.fluid-author-section {
+  margin-top: clamp(18.53px, calc((100vw - 600px) / (1920 - 600) * (50 - 18.53) + 18.53px), 40px) !important;
+  margin-bottom: clamp(18.53px, calc((100vw - 600px) / (1920 - 600) * (50 - 18.53) + 18.53px), 40px) !important;
 }

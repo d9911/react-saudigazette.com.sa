@@ -54,7 +54,7 @@ export default function AdaptedArticle({
             </h1>
 
             {/* Author Profile section */}
-            <div className="flex items-center gap-3.5 border-y border-gray-200 py-3.5 my-5 dark:border-zinc-700">
+            <div className="fluid-author-section flex items-center gap-3.5 border-y border-gray-200 py-3.5 dark:border-zinc-700">
               <img
                 src="assets/img/1225_1707461067.jpg"
                 alt="Reuters"

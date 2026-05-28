@@ -229,7 +229,7 @@ export default function App() {
       <h1 className="sr-only">Home - Latest News from Saudi Arabia and the World</h1>
 
       {/* TOP DESKTOP HEADER */}
-      <div className="container">
+      <div className="container fluid-container">
         <div className="row">
           <div className="col-md-12">
             <header className="w-full">
@@ -297,7 +297,7 @@ export default function App() {
       </div>
 
       {/* DESKTOP HIGHLIGHT NAVIGATION BAR */}
-      <div className="container">
+      <div className="container fluid-container">
         <div className="main-menu hidden md:flex w-full justify-between items-center py-2.5 mb-4 flex-wrap gap-y-2.5">
           <div className="hidden" />
           <div className="flex flex-row flex-wrap items-center justify-start xl:justify-center gap-1 md:gap-y-2 md:gap-x-2.5 overflow-visible flex-1 min-w-0 mr-4">
@@ -358,7 +358,7 @@ export default function App() {
       {/* FLOATING SEARCH MODAL PANEL */}
       {searchOpen && (
         <div className="bg-gray-50 border-b border-gray-200 py-6 px-4 dark:bg-zinc-900 transition-all">
-          <div className="container max-w-4xl mx-auto flex flex-col gap-4">
+          <div className="container fluid-container max-w-4xl mx-auto flex flex-col gap-4">
             <div className="flex items-center justify-between">
               <h4 className="text-[17px] font-bold text-emerald-800 uppercase dark:text-teal-400">Search Saudi Gazette Archive</h4>
               <button
@@ -490,7 +490,7 @@ export default function App() {
       </aside>
 
       {/* CORE WEB LAYOUT CONTENT CARDS */}
-      <main className="flex-1 py-4">
+      <main className="flex-1 fluid-main-padding">
         <div className={currentView === 'article' ? 'block' : 'hidden'}>
           <AdaptedArticle
             newsLetterEmail={newsLetterEmail}
@@ -504,7 +504,7 @@ export default function App() {
 
         <div className={currentView === 'home' ? 'block' : 'hidden'}>
           {/* DESKTOP LAYOUT (>= 768px) */}
-          <div className="hidden md:block container px-4">
+          <div className="hidden md:block container fluid-container">
             <div className="mb-8">
               <HeroFeatured />
             </div>
@@ -537,7 +537,7 @@ export default function App() {
           </div>
 
           {/* MOBILE LAYOUT (< 768px) */}
-          <div className="block md:hidden container px-4 flex flex-col gap-6">
+          <div className="block md:hidden container fluid-container flex flex-col gap-6">
             <HeroFeatured />
             <SaudiArabia />
             <LatestNews />
@@ -560,7 +560,7 @@ export default function App() {
 
       {/* FOOTER */}
       <footer className="border-t-[25px] border-[#335243] py-10">
-        <div className="container footer-content flex flex-col md:flex-row justify-between gap-10">
+        <div className="container fluid-container footer-content flex flex-col md:flex-row justify-between gap-10">
           <div className="left-footer flex flex-col justify-between items-start gap-4">
             <a href="#" className="block">
               <img

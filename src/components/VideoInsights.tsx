@@ -1,13 +1,38 @@
-import { Play } from "lucide-react";
-import { getImageUrl, VIDEO_ARTICLES } from "../data";
+import { useState, useRef } from 'react'
+import { Play } from 'lucide-react'
+import { getImageUrl, VIDEO_ARTICLES } from '../data'
 
 export default function VideoInsights() {
+  const [activeSlide, setActiveSlide] = useState(0)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const handleScroll = () => {
+    if (containerRef.current) {
+      const { scrollLeft, clientWidth } = containerRef.current
+      const index = Math.round(Math.abs(scrollLeft) / (clientWidth || 1))
+      setActiveSlide(index)
+    }
+  }
+
+  const scrollToSlide = (index: number) => {
+    if (containerRef.current) {
+      const children = containerRef.current.children
+      if (children && children[index]) {
+        const child = children[index] as HTMLElement
+        child.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center',
+        })
+        setActiveSlide(index)
+      }
+    }
+  }
+
   return (
     <div id="video" className="home-videos py-10 my-8 rounded-xl px-4 md:px-6">
-      <h3 className="videos-title text-[28px] font-serif font-bold text-white border-b border-[#feffff50] pb-2 mb-6">
-        Video Insights
-      </h3>
-      
+      <h3 className="videos-title text-[28px] font-serif font-bold text-white border-b border-[#feffff50] pb-2 mb-6">Video Insights</h3>
+
       {/* Desktop View */}
       <div className="hidden md:block shadow-md">
         {VIDEO_ARTICLES.length > 0 && (
@@ -19,7 +44,7 @@ export default function VideoInsights() {
                   alt={VIDEO_ARTICLES[0].title}
                   className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = "https://saudigazette.com.sa/saudigazette/uploads/global_files/no-image.jpg";
+                    ;(e.target as HTMLImageElement).src = 'https://saudigazette.com.sa/saudigazette/uploads/global_files/no-image.jpg'
                   }}
                 />
                 <div className="play-btn absolute bottom-4 right-4 bg-emerald-700/90 text-white rounded-full p-3.5 shadow-lg group-hover:bg-emerald-600 transition">
@@ -27,12 +52,8 @@ export default function VideoInsights() {
                 </div>
               </div>
               <div className="flex-1 flex flex-col justify-center">
-                <span className="bg-emerald-600/30 text-emerald-300 text-[11px] uppercase tracking-wider font-extrabold px-3 py-1 rounded-full w-fit mb-3">
-                  Featured Video
-                </span>
-                <h3 className="text-2xl lg:text-3xl font-bold text-zinc-100 font-serif leading-tight group-hover:text-amber-300 transition duration-300 mb-4">
-                  {VIDEO_ARTICLES[0].title}
-                </h3>
+                <span className="bg-emerald-600/30 text-emerald-300 text-[11px] uppercase tracking-wider font-extrabold px-3 py-1 rounded-full w-fit mb-3">Featured Video</span>
+                <h3 className="text-2xl lg:text-3xl font-bold text-zinc-100 font-serif leading-tight group-hover:text-amber-300 transition duration-300 mb-4">{VIDEO_ARTICLES[0].title}</h3>
                 <span className="time text-xs text-emerald-200/70 block mt-1">{VIDEO_ARTICLES[0].publishTime}</span>
               </div>
             </div>
@@ -49,16 +70,14 @@ export default function VideoInsights() {
                   alt={art.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = "https://saudigazette.com.sa/saudigazette/uploads/global_files/no-image.jpg";
+                    ;(e.target as HTMLImageElement).src = 'https://saudigazette.com.sa/saudigazette/uploads/global_files/no-image.jpg'
                   }}
                 />
                 <div className="play-btn absolute bottom-3 right-3 bg-emerald-700/90 text-white rounded-full p-2.5 shadow-lg group-hover:bg-emerald-600 transition">
                   <Play className="w-4 h-4 fill-white" />
                 </div>
               </div>
-              <h3 className="text-[14.5px] font-bold text-zinc-100 font-serif line-clamp-2 leading-snug group-hover:text-amber-300 transition">
-                {art.title}
-              </h3>
+              <h3 className="text-[14.5px] font-bold text-zinc-100 font-serif line-clamp-2 leading-snug group-hover:text-amber-300 transition">{art.title}</h3>
               <span className="time text-[11px] text-gray-300 block mt-1">{art.publishTime}</span>
             </a>
           ))}
@@ -66,7 +85,12 @@ export default function VideoInsights() {
       </div>
 
       {/* Mobile View: Horizontal Scroll with 9:16 aspect ratio (276*400) and text on bottom */}
-      <div className="md:hidden mt-4 overflow-x-auto overflow-y-hidden flex flex-row gap-4 pb-4 snap-x snap-mandatory scrollbar-none" style={{ scrollbarWidth: 'none' }}>
+      <div
+        ref={containerRef}
+        onScroll={handleScroll}
+        className="md:hidden mt-4 overflow-x-auto overflow-y-hidden flex flex-row gap-4 pb-4 snap-x snap-mandatory scrollbar-none"
+        style={{ scrollbarWidth: 'none' }}
+      >
         {VIDEO_ARTICLES.map((art) => (
           <a key={art.id} href={`#${art.id}`} className="block shrink-0 snap-start group" style={{ width: '276px' }}>
             <div className="relative overflow-hidden rounded-lg mb-3" style={{ width: '276px', height: '400px' }}>
@@ -75,20 +99,31 @@ export default function VideoInsights() {
                 alt={art.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-300 animate-fade-in"
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = "https://saudigazette.com.sa/saudigazette/uploads/global_files/no-image.jpg";
+                  ;(e.target as HTMLImageElement).src = 'https://saudigazette.com.sa/saudigazette/uploads/global_files/no-image.jpg'
                 }}
               />
               <div className="play-btn absolute bottom-4 right-4 bg-emerald-700/90 text-white rounded-full p-2.5 shadow-lg group-hover:bg-emerald-600 transition">
                 <Play className="w-4 h-4 fill-white" />
               </div>
             </div>
-            <h3 className="text-[14.5px] font-bold text-zinc-100 font-serif leading-snug group-hover:text-amber-300 transition line-clamp-2">
-              {art.title}
-            </h3>
+            <h3 className="text-[14.5px] font-bold text-zinc-100 font-serif leading-snug group-hover:text-amber-300 transition line-clamp-2">{art.title}</h3>
             <span className="time text-[11px] text-gray-300 block mt-1">{art.publishTime}</span>
           </a>
         ))}
       </div>
+
+      {/* Mobile Video Slides Indicators */}
+      <div className="carousel-bullets only-mobile" style={{ marginTop: '16px' }} role="group" aria-label="Slide navigation">
+        {VIDEO_ARTICLES.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => scrollToSlide(idx)}
+            className={activeSlide === idx ? 'active' : ''}
+            aria-current={activeSlide === idx ? 'true' : 'false'}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
+      </div>
     </div>
-  );
+  )
 }
