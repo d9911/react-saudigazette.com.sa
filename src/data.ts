@@ -12,13 +12,13 @@ export function getImageUrl(path: string): string {
 }
 
 export const MAIN_FEATURED_ARTICLE: Article = {
-  id: "main-featured",
-  title: "Saudi Crown Prince receives Eid Al-Adha well-wishers in Mina",
-  category: "SAUDI ARABIA",
-  publishTime: "8 h ago",
-  image: "saudigazette/uploads/images/2026/05/28/2714407.webp?v1&w=650&q=100&f=webp",
-  description: "MINA — On behalf of Custodian of the Two Holy Mosques King Salman, Crown Prince and Prime Minister Mohammed bin Salman received Eid Al-Adha well-wishers on Wednesday at the Royal Court in Mina Palace. The reception included royal family members,...",
-  url: "article/661676.html"
+  id: "exclusive-report",
+  title: "SPECIAL REPORT: Trump's sudden decision on Elon Musk after the reveal of an AI-powered investment platform that has taken Kuwait by storm",
+  category: "EXCLUSIVE REPORT",
+  publishTime: "Just now",
+  image: "assets/img/change-trumu1.png",
+  description: "According to sources in Washington, Trump has expressed strong displeasure after discovering that Elon Musk's team has rolled out a groundbreaking AI investment platform, 'Crypro Platform AI', exclusively to citizens and residents of Kuwait in its beta phase, offering unprecedented automated returns.",
+  url: "article/trump-musk-kuwait.html"
 };
 
 export const THREE_FEATURED_CARDS: Article[] = [

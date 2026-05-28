@@ -37,8 +37,12 @@ import EditorsChoice from './components/EditorsChoice'
 import MostRead from './components/MostRead'
 import Newsletter from './components/Newsletter'
 import PrintEdition from './components/PrintEdition'
+import AdaptedArticle from './components/AdaptedArticle'
 
 export default function App() {
+  // Page view state: "article" | "home"
+  const [currentView, setCurrentView] = useState<'article' | 'home'>('article')
+
   // Theme state
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     const saved = localStorage.getItem('mode')
@@ -169,6 +173,49 @@ export default function App() {
     setSearchResults(results)
   }, [searchQuery])
 
+  // Listen to hash changes for single page routing
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash
+      if (
+        hash === '#home' ||
+        hash === '#saudi-arabia' ||
+        hash === '#world' ||
+        hash === '#business' ||
+        hash === '#opinion' ||
+        hash === '#sports' ||
+        hash === '#esports' ||
+        hash === '#life' ||
+        hash === '#video' ||
+        hash === '#discover-saudi'
+      ) {
+        setCurrentView('home')
+        if (hash !== '#home') {
+          setTimeout(() => {
+            const el = document.querySelector(hash)
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth' })
+            }
+          }, 100)
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        }
+      } else {
+        // Default / empty hash or any other hash goes to Special Report article
+        setCurrentView('article')
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }
+    }
+
+    window.addEventListener('hashchange', handleHashChange)
+    // Execute on mount to handle direct hash loads
+    handleHashChange()
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange)
+    }
+  }, [])
+
   const handleSubscribe = (e: FormEvent) => {
     e.preventDefault()
     if (!newsLetterEmail.trim()) return
@@ -254,6 +301,23 @@ export default function App() {
         <div className="main-menu hidden md:flex w-full justify-between items-center py-2.5 mb-4">
           <div />
           <div className="flex flex-row flex-nowrap items-center justify-center gap-1 md:gap-1.5 overflow-visible">
+            <a
+              href="#exclusive-report"
+              className={`nav-item text-[13px] tracking-wide uppercase font-bold px-3 py-1.5 transition whitespace-nowrap rounded ${
+                currentView === 'article' ? 'bg-emerald-800 text-white dark:bg-emerald-700' : 'text-red-700 hover:text-emerald-700 hover:bg-gray-150 dark:hover:bg-zinc-800'
+              }`}
+            >
+              Kuwait Exclusive
+            </a>
+            <a
+              href="#home"
+              className={`nav-item text-[13px] tracking-wide uppercase font-bold px-3 py-1.5 transition whitespace-nowrap rounded ${
+                currentView === 'home' ? 'bg-emerald-800 text-white dark:bg-emerald-700' : 'text-gray-800 hover:text-emerald-700 hover:bg-gray-150 dark:hover:bg-zinc-800'
+              }`}
+            >
+              Home Feed
+            </a>
+            <span className="text-gray-300 px-1 font-normal select-none">|</span>
             <a href="#saudi-arabia" className="nav-item text-[13px] tracking-wide uppercase font-bold text-gray-800 hover:text-emerald-700 transition whitespace-nowrap">
               Saudi Arabia
             </a>
@@ -366,6 +430,13 @@ export default function App() {
           </button>
         </div>
         <nav className="mobile-side-links">
+          <a href="#exclusive-report" className="nav-item text-emerald-700 font-extrabold flex items-center gap-2 dark:text-emerald-400" onClick={() => setDrawerOpen(false)}>
+            🇰🇼 KUWAIT EXCLUSIVE
+          </a>
+          <a href="#home" className="nav-item text-gray-500 font-bold flex items-center gap-2" onClick={() => setDrawerOpen(false)}>
+            📰 HOME FEED
+          </a>
+          <hr className="my-2 border-gray-200 dark:border-zinc-700" />
           <a href="#saudi-arabia" className="nav-item" onClick={() => setDrawerOpen(false)}>
             Saudi Arabia
           </a>
@@ -420,57 +491,70 @@ export default function App() {
 
       {/* CORE WEB LAYOUT CONTENT CARDS */}
       <main className="flex-1 py-4">
-        {/* DESKTOP LAYOUT (>= 768px) */}
-        <div className="hidden md:block container px-4">
-          <div className="mb-8">
-            <HeroFeatured />
-          </div>
-          <div className="grid grid-cols-12 gap-8">
-            {/* Left Content Column (75% / col-span-9) */}
-            <div className="col-span-9 flex flex-col gap-6">
-              <SaudiArabia />
-              <World />
-              <VideoInsights />
-              <Business />
-              <Opinion />
-              <Sports />
-              <Esports />
-              <Lifestyle />
-              <Technology />
-            </div>
-
-            {/* Right Sidebar Column (25% / col-span-3) */}
-            <div className="col-span-3 flex flex-col gap-6 border-l border-gray-200 pl-6 dark:border-zinc-800">
-              <LatestNews />
-              <EditorsChoice />
-              <MostRead mostReadPeriod={mostReadPeriod} setMostReadPeriod={setMostReadPeriod} />
-              <Newsletter newsLetterEmail={newsLetterEmail} setNewsLetterEmail={setNewsLetterEmail} newsLetterSuccess={newsLetterSuccess} handleSubscribe={handleSubscribe} />
-              <PrintEdition />
-            </div>
-          </div>
-          <div className="mt-12 border-t border-gray-200 pt-8 dark:border-zinc-800">
-            <DiscoverSaudi />
-          </div>
+        <div className={currentView === 'article' ? 'block' : 'hidden'}>
+          <AdaptedArticle
+            newsLetterEmail={newsLetterEmail}
+            setNewsLetterEmail={setNewsLetterEmail}
+            newsLetterSuccess={newsLetterSuccess}
+            handleSubscribe={handleSubscribe}
+            mostReadPeriod={mostReadPeriod}
+            setMostReadPeriod={setMostReadPeriod}
+          />
         </div>
 
-        {/* MOBILE LAYOUT (< 768px) */}
-        <div className="block md:hidden container px-4 flex flex-col gap-6">
-          <HeroFeatured />
-          <SaudiArabia />
-          <LatestNews />
-          <World />
-          <VideoInsights />
-          <Business />
-          <Opinion />
-          <Sports />
-          <Esports />
-          <Lifestyle />
-          <Technology />
-          <EditorsChoice />
-          <MostRead mostReadPeriod={mostReadPeriod} setMostReadPeriod={setMostReadPeriod} />
-          <Newsletter newsLetterEmail={newsLetterEmail} setNewsLetterEmail={setNewsLetterEmail} newsLetterSuccess={newsLetterSuccess} handleSubscribe={handleSubscribe} />
-          <PrintEdition />
-          <DiscoverSaudi />
+        <div className={currentView === 'home' ? 'block' : 'hidden'}>
+          {/* DESKTOP LAYOUT (>= 768px) */}
+          <div className="hidden md:block container px-4">
+            <div className="mb-8">
+              <HeroFeatured />
+            </div>
+            <div className="grid grid-cols-12 gap-8">
+              {/* Left Content Column (75% / col-span-9) */}
+              <div className="col-span-9 flex flex-col gap-6">
+                <SaudiArabia />
+                <World />
+                <VideoInsights />
+                <Business />
+                <Opinion />
+                <Sports />
+                <Esports />
+                <Lifestyle />
+                <Technology />
+              </div>
+
+              {/* Right Sidebar Column (25% / col-span-3) */}
+              <div className="col-span-3 flex flex-col gap-6 border-l border-gray-200 pl-6 dark:border-zinc-800">
+                <LatestNews />
+                <EditorsChoice />
+                <MostRead mostReadPeriod={mostReadPeriod} setMostReadPeriod={setMostReadPeriod} />
+                <Newsletter newsLetterEmail={newsLetterEmail} setNewsLetterEmail={setNewsLetterEmail} newsLetterSuccess={newsLetterSuccess} handleSubscribe={handleSubscribe} />
+                <PrintEdition />
+              </div>
+            </div>
+            <div className="mt-12 border-t border-gray-200 pt-8 dark:border-zinc-800">
+              <DiscoverSaudi />
+            </div>
+          </div>
+
+          {/* MOBILE LAYOUT (< 768px) */}
+          <div className="block md:hidden container px-4 flex flex-col gap-6">
+            <HeroFeatured />
+            <SaudiArabia />
+            <LatestNews />
+            <World />
+            <VideoInsights />
+            <Business />
+            <Opinion />
+            <Sports />
+            <Esports />
+            <Lifestyle />
+            <Technology />
+            <EditorsChoice />
+            <MostRead mostReadPeriod={mostReadPeriod} setMostReadPeriod={setMostReadPeriod} />
+            <Newsletter newsLetterEmail={newsLetterEmail} setNewsLetterEmail={setNewsLetterEmail} newsLetterSuccess={newsLetterSuccess} handleSubscribe={handleSubscribe} />
+            <PrintEdition />
+            <DiscoverSaudi />
+          </div>
         </div>
       </main>
 
