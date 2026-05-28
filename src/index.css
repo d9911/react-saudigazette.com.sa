@@ -1668,3 +1668,44 @@ footer .footer-content .left-footer .social {
   padding-top: clamp(12px, calc((100vw - 320px) / (1440 - 320) * (18 - 12) + 12px), 18px) !important;
   padding-bottom: clamp(12px, calc((100vw - 320px) / (1440 - 320) * (18 - 12) + 12px), 18px) !important;
 }
+
+/* === DARK MODE OVERRIDES FOR MOBILE SIDE MENU DRAWER === */
+.dark-mode .mobile-side-menu {
+  background-color: #1a3030 !important;
+  box-shadow: 6px 0 24px rgb(0 0 0 / 0.6) !important;
+  border-right: 1px solid #234545 !important;
+}
+
+.dark-mode .mobile-side-close {
+  color: #fefefe !important;
+  background: transparent !important;
+}
+
+.dark-mode .mobile-side-links a {
+  color: #e2e8f0 !important;
+  transition: all 0.2s ease;
+}
+
+.dark-mode .mobile-side-links a:hover {
+  background-color: #234545 !important;
+  color: #34d399 !important; /* light accent green on hover */
+}
+
+/* Fix borders, dividers, icons, and supplementary styling inside the drawer */
+.dark-mode .mobile-side-menu hr,
+.dark-mode .mobile-side-menu .border-t,
+.dark-mode .mobile-side-menu .border-gray-100 {
+  border-color: #234545 !important;
+}
+
+.dark-mode .mobile-side-menu svg,
+.dark-mode .mobile-side-menu .text-gray-500,
+.dark-mode .mobile-side-menu .text-gray-600 {
+  color: #94a3b8 !important; /* lighter slate text/icons for contrast */
+}
+
+.dark-mode .mobile-side-menu .text-gray-500:hover,
+.dark-mode .mobile-side-menu .text-gray-600:hover,
+.dark-mode .mobile-side-menu svg:hover {
+  color: #34d399 !important;
+}
