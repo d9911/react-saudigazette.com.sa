@@ -11,6 +11,11 @@ This repository contains a high-fidelity, optimized adaptation of **Donor-1** co
 
 ---
 
+<div align="center" style="margin: 24px 0; display: flex; justify-content: center; align-items: center; gap: 24px; flex-wrap: wrap;">
+  <img src="./1280.jpg" alt="ui pc" style="width: 62%; max-width: 1280px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08);" />
+  <img src="./708.jpg" alt="ui mobile" style="width: 28%; max-width: 560x; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08);" />
+</div>
+
 ## ⚡ Key Achievements & Features
 
 ### 1. Holistic Kuwait Geo-Adaptation (GEO: KW 🇰🇼)
