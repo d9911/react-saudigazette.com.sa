@@ -1722,11 +1722,11 @@ footer .footer-content .left-footer .social {
   color: #c9d1d9 !important;
 }
 
-/* On desktops/laptops between 769px and 1210px */
-@media (min-width: 769px) and (max-width: 1210px) {
+/* On desktops/laptops between 769px and 1350px */
+@media (min-width: 769px) and (max-width: 1350px) {
   .fluid-header-date {
-    /* Using the exact user-defined fluid typography calculation */
-    font-size: clamp(9.5px, calc((100vw - 769px) / (1210 - 769) * (12 - 9.5) + 9.5px), 12px) !important;
+    /* Using the exact user-defined fluid typography calculation up to 1350px */
+    font-size: clamp(9.5px, calc((100vw - 769px) / (1350 - 769) * (12 - 9.5) + 9.5px), 12px) !important;
     max-width: 130px !important;
     min-width: 0 !important;
     white-space: normal !important;
@@ -1734,11 +1734,12 @@ footer .footer-content .left-footer .social {
     word-wrap: break-word !important;
     line-height: 1.45 !important;
     display: inline-block !important;
+    margin: 0 auto auto 20px !important;
   }
 }
 
-/* On high-res screens greater than 1210px */
-@media (min-width: 1211px) {
+/* On high-res screens greater than 1350px */
+@media (min-width: 1351px) {
   .fluid-header-date {
     font-size: 12px !important;
     min-width: 240px !important;
@@ -1746,4 +1747,3 @@ footer .footer-content .left-footer .social {
     white-space: nowrap !important;
   }
 }
-

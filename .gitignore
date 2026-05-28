@@ -43,5 +43,5 @@ coverage/
 output.txt
 
 # Specific assets (если нужно исключить конкретные файлы)
-dist/assets/index-DOosnPSx.js
-dist/assets/index-DUdBUt-R.css
+# dist/assets/index-DOosnPSx.js
+# dist/assets/index-DUdBUt-R.css

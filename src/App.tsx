@@ -298,9 +298,9 @@ export default function App() {
 
       {/* DESKTOP HIGHLIGHT NAVIGATION BAR */}
       <div className="container">
-        <div className="main-menu hidden md:flex w-full justify-between items-center py-2.5 mb-4">
-          <div />
-          <div className="flex flex-row flex-nowrap items-center justify-center gap-1 md:gap-1.5 overflow-visible">
+        <div className="main-menu hidden md:flex w-full justify-between items-center py-2.5 mb-4 flex-wrap gap-y-2.5">
+          <div className="hidden" />
+          <div className="flex flex-row flex-wrap items-center justify-start xl:justify-center gap-1 md:gap-y-2 md:gap-x-2.5 overflow-visible flex-1 min-w-0 mr-4">
             <a
               href="#exclusive-report"
               className={`nav-item text-[13px] tracking-wide uppercase font-bold px-3 py-1.5 transition whitespace-nowrap rounded ${
