@@ -827,7 +827,7 @@ export default function App() {
               </div>
 
               {/* Sports sub-block */}
-              <div id="sports" className="mb-6 border-t border-gray-100 pt-3">
+              <div id="sports" className="mb-6">
                 <h3 className="big-title text-[28px] font-serif font-bold text-[#335243] border-b border-gray-300 pb-1.5">
                   Sports
                 </h3>
@@ -883,7 +883,7 @@ export default function App() {
             {/* Right Column: Editor's Choice + Most Read + Newsletter Signup */}
             <div className="col-md-3">
               {/* Editor Choice widget container */}
-              <div id="editors-choice" className="editor-choice-container editor-right border-b border-gray-100 pb-5 mb-5 mt-4">
+              <div id="editors-choice" className="editor-choice-container editor-right pb-5 mb-5 mt-4">
                 <h3 className="title text-[22px] font-serif font-bold text-[#335243] border-b border-gray-300 pb-2 mb-3">
                   Editor's Choice
                 </h3>
@@ -984,33 +984,31 @@ export default function App() {
               </div>
 
               {/* Newsletter subscription widget */}
-              <div id="newsletter" className="newsletter bg-gray-50 p-4 rounded-xl dark:bg-zinc-800 transition">
-                <h3 className="text-lg font-bold text-[#335243] dark:text-emerald-400 font-serif">
-                  Gazette Newsletter
-                </h3>
-                <p className="text-xs text-gray-500 dark:text-zinc-300 mt-1">
-                  Stay ahead. Sign up for our direct daily updates, breaking bulletins, and exclusive analysis.
-                </p>
+              <div id="widget_23905" className="newsletter">
+                <div className="big-title">Newsletter</div>
                 {newsLetterSuccess ? (
-                  <p className="text-xs text-emerald-800 bg-emerald-50 p-2.5 rounded border border-emerald-200 mt-3 dark:bg-emerald-950 dark:text-emerald-200">
+                  <div className="newsletter-description text-emerald-800 bg-emerald-50 p-2.5 rounded border border-emerald-200 mt-3 dark:bg-emerald-950 dark:text-emerald-200">
                     {newsLetterSuccess}
-                  </p>
+                  </div>
                 ) : (
-                  <form onSubmit={handleSubscribe} className="mt-3.5 flex flex-col gap-2">
-                    <input
-                      type="email"
-                      required
-                      placeholder="Your email address"
-                      value={newsLetterEmail}
-                      onChange={(e) => setNewsLetterEmail(e.target.value)}
-                      className="w-full bg-white text-black p-2 rounded text-xs border border-gray-300 focus:ring-1 focus:ring-emerald-700 outline-none dark:bg-zinc-700 dark:text-white dark:border-zinc-600"
-                    />
-                    <button
-                      type="submit"
-                      className="w-full py-2 bg-[#335243] text-white rounded text-xs font-bold hover:bg-emerald-850 cursor-pointer transition uppercase tracking-wider"
-                    >
-                      Subscribe
-                    </button>
+                  <form onSubmit={handleSubscribe} className="newsletter-content" style={{ display: 'contents' }} id="registerForm">
+                    <div className="newsletter-title" style={{ fontFamily: 'Newsreader, serif' }}>Stay ahead with Saudi Gazette</div>
+                    <div id="FormSubscriberMessage" className="newsletter-description">
+                      Subscribe to our newsletter to receive daily news insights, breaking stories, and in-depth analysis straight to your inbox!
+                    </div>
+                    <div className="newsletter-input">
+                      <input
+                        id="newsletterEmail"
+                        name="ms-email"
+                        required
+                        type="email"
+                        placeholder="Your email address"
+                        value={newsLetterEmail}
+                        onChange={(e) => setNewsLetterEmail(e.target.value)}
+                        className="bg-white text-black dark:bg-zinc-800 dark:text-white"
+                      />
+                      <button type="submit">Subscribe</button>
+                    </div>
                   </form>
                 )}
               </div>
@@ -1020,92 +1018,93 @@ export default function App() {
 
         {/* SECTION 6: THREE-COLUMN SECONDARY GENERAL SECTIONS (Esports, Lifestyle, Tech) */}
         <div className="container mt-6">
-          <div className="row">
-            {/* Esports column */}
-            <div className="col-md-4 border-r border-gray-100 pr-4" id="esports">
-              <h3 className="big-title text-[23px] font-serif font-bold text-[#335243] border-b border-gray-300 pb-1">
-                Esports Nations
-              </h3>
-              <div className="flex flex-col gap-5 py-2">
-                {ESPORTS_ARTICLES.map((art) => (
-                  <a key={art.id} href={`#${art.id}`} className="block group">
-                    <div className="flex gap-3">
+          {/* Esports column */}
+          <div className="mb-8" id="esports">
+            <h3 className="big-title text-[28px] font-serif font-bold text-[#335243] border-b border-gray-300 pb-1.5 mb-2">
+              Esports Nations
+            </h3>
+            <div className="grid-3-news esports-mobile">
+              {ESPORTS_ARTICLES.map((art) => (
+                <a key={art.id} href={`#${art.id}`} className="block group">
+                  <div className="home-news-card">
+                    <div className="image overflow-hidden rounded-lg mb-2.5">
                       <img
                         src={getImageUrl(art.image)}
                         alt={art.title}
-                        className="w-[100px] h-[75px] rounded object-cover shrink-0"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = "https://saudigazette.com.sa/saudigazette/uploads/global_files/no-image.jpg";
                         }}
                       />
-                      <div className="flex flex-col justify-between flex-1">
-                        <h4 className="text-[13.5px] font-bold text-gray-900 group-hover:text-emerald-800 transition font-serif leading-snug line-clamp-3">
-                          {art.title}
-                        </h4>
-                        <span className="time text-[10px] text-gray-400 mt-1 block">{art.publishTime}</span>
-                      </div>
                     </div>
-                  </a>
-                ))}
-              </div>
+                    <div className="content">
+                      <h4 className="description text-[14.5px] font-bold text-gray-900 group-hover:text-emerald-800 transition font-serif leading-snug line-clamp-3">
+                        {art.title}
+                      </h4>
+                      <span className="time text-[10px] text-gray-400 mt-1 block">{art.publishTime}</span>
+                    </div>
+                  </div>
+                </a>
+              ))}
             </div>
+          </div>
 
-            {/* Lifestyle column */}
-            <div className="col-md-4 border-r border-gray-100 px-4" id="life">
-              <h3 className="big-title text-[23px] font-serif font-bold text-[#335243] border-b border-gray-300 pb-1">
-                Lifestyle & Arts
-              </h3>
-              <div className="flex flex-col gap-5 py-2">
-                {LIFESTYLE_ARTICLES.map((art) => (
-                  <a key={art.id} href={`#${art.id}`} className="block group">
-                    <div className="flex gap-3">
+          {/* Lifestyle column */}
+          <div className="mb-8" id="life">
+            <h3 className="big-title text-[28px] font-serif font-bold text-[#335243] border-b border-gray-300 pb-1.5 mb-2">
+              Lifestyle & Arts
+            </h3>
+            <div className="grid-3-news esports-mobile">
+              {LIFESTYLE_ARTICLES.map((art) => (
+                <a key={art.id} href={`#${art.id}`} className="block group">
+                  <div className="home-news-card">
+                    <div className="image overflow-hidden rounded-lg mb-2.5">
                       <img
                         src={getImageUrl(art.image)}
                         alt={art.title}
-                        className="w-[100px] h-[75px] rounded object-cover shrink-0"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = "https://saudigazette.com.sa/saudigazette/uploads/global_files/no-image.jpg";
                         }}
                       />
-                      <div className="flex flex-col justify-between flex-1">
-                        <h4 className="text-[13.5px] font-bold text-gray-900 group-hover:text-emerald-800 transition font-serif leading-snug line-clamp-3">
-                          {art.title}
-                        </h4>
-                        <span className="time text-[10px] text-gray-400 mt-1 block">{art.publishTime}</span>
-                      </div>
                     </div>
-                  </a>
-                ))}
-              </div>
+                    <div className="content">
+                      <h4 className="description text-[14.5px] font-bold text-gray-900 group-hover:text-emerald-800 transition font-serif leading-snug line-clamp-3">
+                        {art.title}
+                      </h4>
+                      <span className="time text-[10px] text-gray-400 mt-1 block">{art.publishTime}</span>
+                    </div>
+                  </div>
+                </a>
+              ))}
             </div>
+          </div>
 
-            {/* Tech column */}
-            <div className="col-md-4 pl-4" id="tech">
-              <h3 className="big-title text-[23px] font-serif font-bold text-[#335243] border-b border-gray-300 pb-1">
-                Technology
-              </h3>
-              <div className="flex flex-col gap-5 py-2">
-                {TECHNOLOGY_ARTICLES.map((art) => (
-                  <a key={art.id} href={`#${art.id}`} className="block group">
-                    <div className="flex gap-3">
+          {/* Tech column */}
+          <div className="mb-8" id="tech">
+            <h3 className="big-title text-[28px] font-serif font-bold text-[#335243] border-b border-gray-300 pb-1.5 mb-2">
+              Technology
+            </h3>
+            <div className="grid-3-news esports-mobile">
+              {TECHNOLOGY_ARTICLES.map((art) => (
+                <a key={art.id} href={`#${art.id}`} className="block group">
+                  <div className="home-news-card">
+                    <div className="image overflow-hidden rounded-lg mb-2.5">
                       <img
                         src={getImageUrl(art.image)}
                         alt={art.title}
-                        className="w-[100px] h-[75px] rounded object-cover shrink-0"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = "https://saudigazette.com.sa/saudigazette/uploads/global_files/no-image.jpg";
                         }}
                       />
-                      <div className="flex flex-col justify-between flex-1">
-                        <h4 className="text-[13.5px] font-bold text-gray-900 group-hover:text-emerald-800 transition font-serif leading-snug line-clamp-3">
-                          {art.title}
-                        </h4>
-                        <span className="time text-[10px] text-gray-400 mt-1 block">{art.publishTime}</span>
-                      </div>
                     </div>
-                  </a>
-                ))}
-              </div>
+                    <div className="content">
+                      <h4 className="description text-[14.5px] font-bold text-gray-900 group-hover:text-emerald-800 transition font-serif leading-snug line-clamp-3">
+                        {art.title}
+                      </h4>
+                      <span className="time text-[10px] text-gray-400 mt-1 block">{art.publishTime}</span>
+                    </div>
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
         </div>
@@ -1234,7 +1233,7 @@ export default function App() {
               <div className="title text-base font-bold text-[#335243] font-serif border-b border-gray-300 pb-2">
                 News Sections
               </div>
-              <ul className="links mt-3 grid grid-cols-2 md:grid-cols-1 gap-1.5 md:gap-1 text-[13.5px] font-semibold">
+              <ul className="links mt-3 grid grid-cols-2 gap-x-6 gap-y-1.5 md:gap-y-1 text-[13.5px] font-semibold">
                 <li className="link hover:translate-x-1 hover:text-emerald-700 transition">
                   <a href="#saudi-arabia">Saudi Arabia</a>
                 </li>
